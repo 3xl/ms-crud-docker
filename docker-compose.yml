@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  db:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+  app:
+    build: .
+    ports: 
+      - 4001:4001
+    depends_on:
+      - db
+    environment:
+      - MONGO_HOST=db
+      - MONGO_DB=ms-crud
+      - MONGO_USER=root
+      - MONGO_PASS=
+      - PORT=4001
+      - LOG=1
